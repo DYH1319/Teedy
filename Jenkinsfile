@@ -11,6 +11,16 @@ pipeline {
                 sh 'mvn pmd:pmd'
             }
         }
+        stage('Test report') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Doc') {
+            steps {
+                sh 'mvn javadoc:jar'
+            }
+        }
     }
 
     post {
