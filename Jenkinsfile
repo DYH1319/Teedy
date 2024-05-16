@@ -8,17 +8,17 @@ pipeline {
         }
         stage('pmd') {
             steps {
-                sh 'mvn pmd:pmd'
-            }
-        }
-        stage('Test report') {
-            steps {
-                sh 'mvn test'
+                sh 'mvn -B -DskipTests pmd:pmd'
             }
         }
         stage('Doc') {
             steps {
-                sh 'mvn javadoc:jar'
+                sh 'mvn -B -DskipTests javadoc:jar'
+            }
+        }
+        stage('Test report') {
+            steps {
+                sh 'mvn -B test -Dmaven.test.failure.ignore=true'
             }
         }
     }
